@@ -1,16 +1,55 @@
-# React + Vite
+# Create main project folder
+mkdir ai-journal-app
+cd ai-journal-app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Create client (frontend) with Vite
+npm create vite@latest client -- --template react
+cd client
+npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install axios react-router-dom recharts lucide-react date-fns
+cd ..
 
-Currently, two official plugins are available:
+# Create server (backend)
+mkdir server
+cd server
+npm init -y
+npm install express mongoose dotenv cors bcryptjs jsonwebtoken openai
+npm install -D nodemon
+cd ..
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#  Github :
 
-## React Compiler
+git init
+git add .
+git commit -m ""
+git branch -M main -> 1st time alone
+git remote add origin https:// github-link   -> 1st time alone
+git push -u origin main
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#  Project File Structure
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Project/
+├── Website/                    # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── App.jsx           # Main React component (artifact code goes here)
+│   │   ├── index.css         # Tailwind styles
+│   │   └── main.jsx          # Entry point
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── tailwind.config.js
+│
+└── server/                    # Backend (Node + Express)
+    ├── models/
+    │   ├── User.js           # User schema
+    │   └── Journal.js        # Journal schema
+    ├── routes/
+    │   ├── auth.js           # Auth routes
+    │   └── journal.js        # Journal routes
+    ├── middleware/
+    │   └── auth.js           # JWT authentication
+    ├── .env                  # Environment variables
+    ├── server.js             # Main server file
+    └── package.json
