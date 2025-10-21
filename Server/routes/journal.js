@@ -1,36 +1,22 @@
 import express from 'express';
-import OpenAI from 'openai';
 import Journal from '../models/Journal.js';
 import { protect } from '../middleware/auth.js';
-
+import { GoogleGenerativeAI } from '@google/generative-ai';
 const router = express.Router();
 
 // Initialize OpenAI
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// AI Analysis Function
 const analyzeWithAI = async (content) => {
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful journal assistant. Analyze the journal entry and provide: 1) A brief 2-sentence summary, 2) The detected mood (choose from: happy, sad, neutral, excited, anxious, calm, angry, grateful). Format your response as JSON with keys 'summary' and 'mood'."
-        },
-        {
-          role: "user",
-          content: `Analyze this journal entry: ${content}`
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 150
-    });
-
-    const response = completion.choices[0].message.content;
-    const parsed = JSON.parse(response);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const prompt = `Analyze this journal entry and provide: 1) A brief 2-sentence summary, 2) The detected mood (choose from: happy, sad, neutral, excited, anxious, calm, angry, grateful). Format your response as JSON with keys 'summary' and 'mood'.\n\nJournal entry: ${content}`;
+    
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    const parsed = JSON.parse(text);
+    
     return {
       summary: parsed.summary || 'No summary available',
       mood: parsed.mood || 'neutral'
@@ -43,7 +29,6 @@ const analyzeWithAI = async (content) => {
     };
   }
 };
-
 // @route   GET /api/journals
 // @desc    Get all journals for user
 router.get('/', protect, async (req, res) => {
