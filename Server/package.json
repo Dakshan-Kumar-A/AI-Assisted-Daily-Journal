@@ -1,13 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-<<<<<<< HEAD
+
   "main": "server.js",
   "type": "module",
-=======
-  "type": "module",
-  "main": "index.js",
->>>>>>> edbd1ccbbcffee205aa5f0610c10f86792a6517e
+
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -19,22 +16,18 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-<<<<<<< HEAD
-=======
+
+
     "axios": "^1.12.2",
->>>>>>> edbd1ccbbcffee205aa5f0610c10f86792a6517e
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
-<<<<<<< HEAD
     "openai": "^6.7.0"
-=======
-    "node-fetch": "^3.3.2",
-    "openai": "^6.6.0"
->>>>>>> edbd1ccbbcffee205aa5f0610c10f86792a6517e
+
+
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

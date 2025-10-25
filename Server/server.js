@@ -4,12 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import journalRoutes from './routes/journal.js';
-<<<<<<< HEAD
-=======
-import newsRoutes from './routes/news.js';
 
-// Add after other routes
->>>>>>> edbd1ccbbcffee205aa5f0610c10f86792a6517e
 
 dotenv.config();
 
@@ -22,10 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/journals', journalRoutes);
-<<<<<<< HEAD
-=======
-app.use('/api/news', newsRoutes);
->>>>>>> edbd1ccbbcffee205aa5f0610c10f86792a6517e
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
